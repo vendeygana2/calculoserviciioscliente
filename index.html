@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÁLCULO DE PAGO DE SERVICIOS PÚBLICOS VENDE Y GANA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border: 2px solid #ED7318;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .monto, .descuento, .ganancia-usuario {
+            font-size: 25.1px;
+            font-weight: bold;
+            color: #0078d4;
+            margin-top: 20px;
+        }
+        .blink {
+            font-size: 39.36px;
+            animation: blink 1.5s infinite;
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .ganancia-usuario {
+            color: #28a745;
+        }
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+        button {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Logo Vende y Gana" class="logo" style="max-width: 64%; height: auto; margin-bottom: 20px;">
+        <h2>CÁLCULO DE PAGO DE SERVICIOS PÚBLICOS VENDE Y GANA</h2>
+        <label for="monto">MONTO RECARGA SERVICIO (Bs):</label>
+        <input type="number" id="monto" placeholder="Ingrese el monto recarga del servicio">
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="montoPagar" class="monto"></div>
+        <div id="montoDescuento" class="descuento"></div>
+        <div id="gananciaUsuario" class="ganancia-usuario"></div>
+    </div>
+
+    <script>
+        function calcular() {
+            const monto = parseFloat(document.getElementById("monto").value);
+
+            if (isNaN(monto) || monto <= 0) {
+                alert("Por favor, ingrese un monto válido.");
+                return;
+            }
+
+            // Mostrar el monto recarga servicio como "Monto a Pagar"
+            document.getElementById("montoPagar").innerText = `Monto a Pagar: ${monto.toFixed(2)} Bs`;
+
+            // Calcular el monto con descuento del 8% (cliente paga)
+            const descuentoCliente = monto * 0.08;
+            const montoConDescuentoCliente = monto - descuentoCliente;
+            document.getElementById("montoDescuento").innerHTML = 
+                `Monto a Descontar al USUARIO (8% - Descuento): <span class="blink">${montoConDescuentoCliente.toFixed(2)} Bs</span>`;
+
+            // Mostrar la ganancia del usuario VENDE Y GANA (8% del monto total)
+            document.getElementById("gananciaUsuario").innerText = 
+                `GANANCIA USUARIO VENDE Y GANA: ${descuentoCliente.toFixed(2)} Bs`;
+        }
+    </script>
+</body>
+</html>
